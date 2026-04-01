@@ -1,40 +1,737 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snav Browser</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #FAFAFA;
-    --border: #34495E;
-    --dark: #2C3E50;
-    --light-border: #34495E;
-    --text: #2C3E50;
-    --muted: #34495E;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO: Título e descrição para o Google -->
+  <title>Download oficial do Snav Browser para Android (grátis)</title>
+  <meta name="description" content="Download oficial do Snav Browser para Android. Navegador leve, rápido e simples. Baixe a versão mais recente grátis direto no site.">
+  
+  <!-- Favicon atualizado -->
+  <link rel="icon" type="image/png" href="icon.jpg">
+  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FAFAFA;
+      --border: #34495E;
+      --dark: #2C3E50;
+      --light-border: #34495E;
+      --text: #2C3E50;
+      --muted: #34495E;
+      --accent-light: #eef2f5;
+      --card-bg: #ffffff;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero {
+      width: 100%;
+      max-width: 860px;
+      padding: 100px 32px 60px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-text { max-width: 480px; }
+    .logo-area {
+      flex-shrink: 0;
+    }
+    .logo-circle {
+      width: 130px;
+      height: 130px;
+      background: linear-gradient(135deg, #eef2f5 0%, #ffffff 100%);
+      border-radius: 32px;
+      border: 2px solid var(--light-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .logo-circle:hover {
+      transform: scale(1.02);
+    }
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .logo-svg-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2C3E50 0%, #1a2632 100%);
+    }
+    .hidden {
+      display: none !important;
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--light-border);
+      border-radius: 4px;
+      padding: 3px 9px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px;
+      padding: 11px 22px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+    }
+    .btn-primary:hover { background: var(--border); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+      padding: 10px 20px;
+    }
+    .btn-secondary:hover { background: #eef2f5; transform: translateY(-1px); }
+    .divider { width: 100%; max-width: 860px; height: 1px; background: var(--light-border); }
+    
+    /* Seções de informação */
+    .info-section {
+      width: 100%;
+      max-width: 860px;
+      padding: 48px 32px 32px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      margin-bottom: 28px;
+      border-left: 4px solid var(--dark);
+      padding-left: 18px;
+    }
+    .about-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 8px 0;
+    }
+    .info-card {
+      background: transparent;
+      padding: 8px 4px;
+      border-bottom: 1px solid rgba(52, 73, 94, 0.15);
+    }
+    .info-card:last-child {
+      border-bottom: none;
+    }
+    .info-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .title-svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    .info-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+      padding-left: 40px;
+    }
+    .info-text strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
+    .license-badge {
+      display: inline-block;
+      background: #eef2f5;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 40px;
+      color: #2c3e50;
+      margin-right: 12px;
+      margin-top: 6px;
+    }
+    .repo-link {
+      color: #2c3e50;
+      text-decoration: none;
+      border-bottom: 1px dashed var(--border);
+    }
+    .repo-link:hover {
+      border-bottom-style: solid;
+    }
+    
+    .features {
+      width: 100%;
+      max-width: 860px;
+      padding: 32px 32px 56px;
+    }
+    .features-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--light-border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--light-border);
+    }
+    .feature-card {
+      background: var(--bg);
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eef2f5;
+      border: 1px solid var(--light-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+    }
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--dark);
+      stroke-width: 1.7;
+      fill: none;
+    }
+    .feature-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .feature-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    footer {
+      width: 100%;
+      max-width: 860px;
+      padding: 24px 32px;
+      border-top: 1px solid var(--light-border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .footer-legal {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes gentleBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    .error-animation {
+      animation: gentleBounce 0.6s ease-in-out;
+    }
+    .logo-circle::before {
+      content: attr(data-status);
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+    .logo-circle:hover::before {
+      opacity: 1;
+    }
+    
+    @media (max-width: 640px) {
+      .hero {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        padding: 60px 24px 40px;
+      }
+      .logo-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 24px;
+      }
+      h1 { font-size: 2rem; }
+      .logo-circle::before { font-size: 8px; bottom: -25px; }
+      .section-title { font-size: 1.5rem; }
+      .info-text { padding-left: 20px; }
+      .title-svg { width: 24px; height: 24px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-text">
+    <div class="badge">Open Source · Apache-2.0</div>
+    <h1>Snav Browser</h1>
+    <p class="hero-desc">
+      Um navegador básico, leve e rápido, feito para o uso diário. Sem recursos desnecessários — só o essencial.
+    </p>
+    <div class="buttons">
+      <!-- Botão Download com link atualizado para MediaFire -->
+      <a href="https://www.mediafire.com/folder/xwrsi0t3qbv87/Apk" target="_blank" class="btn-primary" id="downloadBtn">Download</a>
+      <a href="https://github.com/snavbrowser/snav-browser" target="_blank" class="btn-secondary" id="repoBtn">Repositório</a>
+    </div>
+  </div>
+  <div class="logo-area">
+    <div class="logo-circle" id="logoContainer" data-status="Snav Browser">
+      <!-- Imagem do ícone alterada para icon.jpg (nova imagem) -->
+      <img id="logoImg" class="logo-img" 
+           src="icon.jpg" 
+           alt="Snav Browser Logo"
+           crossorigin="anonymous"
+           onerror="handleImageError()"
+           onload="handleImageLoad()">
+      <div id="svgFallback" class="logo-svg-fallback hidden">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradBg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2C3E50;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1a2632;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="gradAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#48c9b0;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#5dade2;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill="url(#gradBg)" rx="28" ry="28"/>
+          <circle cx="50" cy="50" r="32" fill="white" fill-opacity="0.12" stroke="white" stroke-width="1.2" stroke-opacity="0.5"/>
+          <path d="M50 18 L50 82 M18 50 L82 50" stroke="white" stroke-width="1.5" stroke-opacity="0.4"/>
+          <rect x="30" y="35" width="40" height="30" rx="6" fill="white" fill-opacity="0.95"/>
+          <text x="50" y="55" font-family="monospace" font-size="22" font-weight="bold" text-anchor="middle" fill="#2C3E50" dominant-baseline="middle">S</text>
+          <path d="M62 48 L70 48 M62 52 L68 52" stroke="#2C3E50" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="50" cy="70" r="8" fill="none" stroke="url(#gradAccent)" stroke-width="1.8" stroke-dasharray="3 2"/>
+          <path d="M72 72 L78 78 M72 78 L78 72" stroke="white" stroke-width="1.5" stroke-opacity="0.6"/>
+        </svg>
+      </div>
+      <div id="errorSvg" class="logo-svg-fallback hidden">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="errorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#c0392b;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" fill="url(#errorGrad)" rx="28" ry="28"/>
+          <circle cx="50" cy="50" r="24" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.8"/>
+          <path d="M38 38 L62 62 M62 38 L38 62" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <text x="50" y="86" font-family="monospace" font-size="12" text-anchor="middle" fill="white" font-weight="bold">offline</text>
+          <rect x="42" y="20" width="16" height="12" rx="2" fill="white" fill-opacity="0.9"/>
+          <path d="M50 26 L50 32 M48 29 L52 29" stroke="#c0392b" stroke-width="1.2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<section class="info-section">
+  <h2 class="section-title">Sobre o Snav Browser</h2>
+  <div class="about-grid">
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span>O que é o Snav Browser</span>
+      </div>
+      <div class="info-text">Snav Browser é um navegador <strong>leve, simples e rápido</strong>, com apenas o básico para navegar. Sem excessos, sem rastreadores ocultos — foco total em performance e simplicidade.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>Quem deve usar</span>
+      </div>
+      <div class="info-text">Qualquer pessoa, em dispositivos modernos ou antigos, que queira um navegador <strong>limpo e leve</strong>.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>Para que serve</span>
+      </div>
+      <div class="info-text">Pesquisar na web, assistir vídeos e ler artigos de forma prática. Snav Browser entrega uma experiência direta, sem distrações, carregando páginas com eficiência mesmo em conexões modestas.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z"/>
+        </svg>
+        <span>Diferenças</span>
+      </div>
+      <div class="info-text">É <strong>simples, limpo, rápido e leve</strong>. Interface sem poluição visual, ausência de telemetria intrusiva e consumo reduzido de memória. Feito para quem deseja apenas navegar sem complicações.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4v16h16V4H4z M8 9h8M8 13h6M8 17h4"/>
+          <rect x="4" y="4" width="16" height="16" rx="2"/>
+        </svg>
+        <span>Download</span>
+      </div>
+      <div class="info-text"><strong>Seguro e fácil de instalar, sem complicações.</strong> Versão disponível para Android via MediaFire.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12h6M12 9v6M3 3h18v18H3z"/>
+          <path d="M8 21h8"/>
+        </svg>
+        <span>Código aberto</span>
+      </div>
+      <div class="info-text">Possui um <a href="https://github.com/snavbrowser/snav-browser" target="_blank" class="repo-link">repositório oficial</a> disponível para quem quiser ver ou contribuir com o código. Transparência total e comunidade colaborativa.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-title">
+        <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>Licença Apache-2.0</span>
+      </div>
+      <div class="info-text">
+        <span class="license-badge">Apache License 2.0</span> 
+        Permite usar, modificar e distribuir o aplicativo livremente, até mesmo para fins comerciais, desde que mantenha a atribuição ao autor e não use marcas registradas indevidamente. Você pode criar versões derivadas, contribuir com melhorias e compartilhar sem burocracia.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="features">
+  <p class="features-label">Recursos essenciais</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z" />
+        </svg>
+      </div>
+      <div class="feature-title">Leve e rápido</div>
+      <div class="feature-desc">Focado em performance absoluta e baixo consumo de recursos, ideal para qualquer hardware.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M4 7L12 3L20 7L12 11L4 7Z" />
+          <path d="M4 12L12 16L20 12" />
+          <path d="M4 17L12 21L20 17" />
+        </svg>
+      </div>
+      <div class="feature-title">Código aberto</div>
+      <div class="feature-desc">Repositório público, auditoria livre e contribuições bem-vindas.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M12 3C8.5 3 5 5.5 5 9c0 5 7 11 7 11s7-6 7-11c0-3.5-3.5-6-7-6z" />
+          <circle cx="12" cy="9" r="2.5" />
+        </svg>
+      </div>
+      <div class="feature-title">Privacidade</div>
+      <div class="feature-desc">Navegação segura, sem rastreio invasivo e sem coleta de dados pessoais.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Snav Browser — 2026</span>
+  <span class="footer-legal">Apache 2.0 · código aberto · liberdade para inovar</span>
+</footer>
+
+<script>
+  let errorCount = 0;
+  const MAX_RETRIES = 2;
+  let finalErrorShown = false;
+  
+  const img = document.getElementById('logoImg');
+  const svgFallback = document.getElementById('svgFallback');
+  const errorSvg = document.getElementById('errorSvg');
+  const logoContainer = document.getElementById('logoContainer');
+  const downloadBtn = document.getElementById('downloadBtn');
+  
+  function hideAllFallbacks() {
+    if (svgFallback) svgFallback.classList.add('hidden');
+    if (errorSvg) errorSvg.classList.add('hidden');
   }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+  function showStandardSvgFallback(reason = 'fallback') {
+    if (finalErrorShown) return;
+    console.log(`Mostrando SVG padrão. Motivo: ${reason}`);
+    if (img) img.style.display = 'none';
+    hideAllFallbacks();
+    if (svgFallback) {
+      svgFallback.classList.remove('hidden');
+      svgFallback.classList.add('fade-in');
+      if (logoContainer) {
+        logoContainer.classList.add('error-animation');
+        logoContainer.setAttribute('data-status', 'Modo offline');
+        setTimeout(() => {
+          if (logoContainer) logoContainer.classList.remove('error-animation');
+        }, 600);
+      }
+    }
   }
-  .hero {
-    width: 100%;
-    max-width: 860px;
-    padding: 100px 32px 60px;
+  
+  function showErrorSvgFallback() {
+    if (finalErrorShown) return;
+    finalErrorShown = true;
+    console.log('Ativando SVG de erro definitivo');
+    if (img) img.style.display = 'none';
+    hideAllFallbacks();
+    if (errorSvg) {
+      errorSvg.classList.remove('hidden');
+      errorSvg.classList.add('fade-in');
+      if (logoContainer) {
+        logoContainer.classList.add('error-animation');
+        logoContainer.setAttribute('data-status', 'Erro de carregamento');
+        setTimeout(() => {
+          if (logoContainer) logoContainer.classList.remove('error-animation');
+        }, 700);
+      }
+    }
   }
-  .hero-text { max-width: 580px; }
-  .badge {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
+  
+  function retryImageLoad() {
+    if (errorCount < MAX_RETRIES && img && !finalErrorShown) {
+      errorCount++;
+      console.log(`Tentativa de recarregar imagem ${errorCount}/${MAX_RETRIES}`);
+      const originalSrc = img.src;
+      img.src = '';
+      img.src = originalSrc.split('?')[0] + '?retry=' + Date.now();
+      if (logoContainer) logoContainer.setAttribute('data-status', `Tentativa ${errorCount}...`);
+    } else if (errorCount >= MAX_RETRIES && !finalErrorShown) {
+      showErrorSvgFallback();
+    }
+  }
+  
+  window.handleImageError = function() {
+    console.error('Erro ao carregar imagem:', img?.src);
+    if (finalErrorShown) return;
+    if (errorCount < MAX_RETRIES) {
+      setTimeout(() => { retryImageLoad(); }, 500);
+    } else {
+      showErrorSvgFallback();
+    }
+  };
+  
+  window.handleImageLoad = function() {
+    if (finalErrorShown) return;
+    if (img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
+      console.log('Imagem carregada com sucesso!');
+      img.style.display = 'block';
+      hideAllFallbacks();
+      if (logoContainer) {
+        logoContainer.setAttribute('data-status', '✓ Imagem carregada');
+        setTimeout(() => {
+          if (logoContainer && logoContainer.getAttribute('data-status') === '✓ Imagem carregada') {
+            logoContainer.setAttribute('data-status', 'Snav Browser');
+          }
+        }, 2000);
+      }
+      errorCount = 0;
+      finalErrorShown = false;
+    } else {
+      if (!finalErrorShown) {
+        if (errorCount >= MAX_RETRIES) {
+          showErrorSvgFallback();
+        } else {
+          showStandardSvgFallback('invalid_dimensions');
+        }
+      }
+    }
+  };
+  
+  async function verifyImageAccessibility() {
+    if (finalErrorShown) return;
+    if (!img || img.style.display === 'none') return;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+      await fetch(img.src, { method: 'HEAD', mode: 'no-cors', signal: controller.signal });
+      clearTimeout(timeoutId);
+    } catch (error) {
+      if (!finalErrorShown && img.style.display !== 'none') {
+        if (errorCount >= MAX_RETRIES) {
+          showErrorSvgFallback();
+        } else {
+          showStandardSvgFallback('accessibility_check');
+        }
+      }
+    }
+  }
+  
+  function initializeLogo() {
+    if (!img || !svgFallback || !logoContainer) return;
+    if (img.complete) {
+      if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+        handleImageError();
+      } else {
+        handleImageLoad();
+      }
+    }
+    setTimeout(() => {
+      if (!finalErrorShown && img && img.style.display !== 'none' && (!img.complete || img.naturalWidth === 0)) {
+        if (errorCount >= MAX_RETRIES) {
+          showErrorSvgFallback();
+        } else {
+          showStandardSvgFallback('timeout');
+        }
+      }
+    }, 4000);
+    setTimeout(() => verifyImageAccessibility(), 2000);
+    
+    logoContainer.addEventListener('dblclick', function() {
+      if (finalErrorShown || img.style.display === 'none') {
+        finalErrorShown = false;
+        errorCount = 0;
+        img.style.display = 'block';
+        hideAllFallbacks();
+        const newSrc = 'icon.jpg?reload=' + Date.now();
+        img.src = newSrc;
+        logoContainer.setAttribute('data-status', 'Recarregando...');
+        setTimeout(() => {
+          if (img.complete && img.naturalWidth > 0) {
+            handleImageLoad();
+          } else {
+            errorCount = 0;
+            retryImageLoad();
+          }
+        }, 200);
+      }
+    });
+  }
+  
+  // Botão download já possui o link direto, removemos o alert para não atrapalhar
+  // Apenas garantimos que o link abre normalmente (já tem target="_blank")
+  if (downloadBtn) {
+    // Remove qualquer listener antigo e mantém o comportamento padrão do href
+    // Mas garantimos que não há prevenção de evento conflitante
+    downloadBtn.addEventListener('click', function(e) {
+      // Permitir que o link abra normalmente, apenas um pequeno feedback opcional
+      console.log('Redirecionando para pasta de download do Snav Browser');
+    });
+  }
+  
+  const repoBtn = document.getElementById('repoBtn');
+  if (repoBtn) {
+    repoBtn.addEventListener('click', (e) => {
+      console.log('Acessando repositório oficial');
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeLogo);
+  } else {
+    initializeLogo();
+  }
+  
+  window.addEventListener('error', function(e) {
+    if (e.target === img || (e.target?.tagName === 'IMG' && e.target.id === 'logoImg')) {
+      if (!finalErrorShown) handleImageError();
+    }
+  }, true);
+</script>
+</body>
+</html>    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
     border: 1px solid var(--light-border);
